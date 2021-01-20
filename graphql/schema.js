@@ -8,6 +8,7 @@ const typeDefs = gql`
         id: ID
         nombre: String
         descripcion: String
+        tamano: String
         precio: Float 
         codigo: String
         stock: Boolean
@@ -17,6 +18,7 @@ const typeDefs = gql`
     input PizzaInput {
         nombre: String!
         descripcion: String!
+        tamano: String!
         precio: Float!
         codigo: String!
         stock: Boolean 
@@ -25,11 +27,15 @@ const typeDefs = gql`
     # QUERY  
     type Query {
         hello: String
+        getPizzas: [Pizza]
+        getPizza(id: ID!): Pizza 
     }
 
     # MUTATION 
     type Mutation {
-        newPizza( input: PizzaInput ): Pizza,
+        newPizza( input: PizzaInput! ): Pizza,
+        updatePizza( id: ID!, input: PizzaInput! ): Pizza
+        deletePizza( id: ID! ): String
     }
 
 `;

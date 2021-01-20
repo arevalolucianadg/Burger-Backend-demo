@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+let tamanoValido = {
+    values: ['CHICA', 'GRANDE'],
+    message: '\'{VALUE}\' no es un tamaño de pizza válido.'
+}
+
 let Schema = mongoose.Schema;
 let pizzaSchema = new Schema({
     codigo: {
@@ -16,6 +21,12 @@ let pizzaSchema = new Schema({
     descripcion: {
         type: String,
         required: [true, 'La descripción es requerida.'],
+        trim: true,
+    },
+    tamano: {
+        type: String,
+        default: 'CHICA',
+        enum: tamanoValido,
         trim: true,
     },
     precio: {
